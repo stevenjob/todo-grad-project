@@ -18,7 +18,8 @@ function createTodo(title, callback) {
     createRequest.open("POST", "/api/todo");
     createRequest.setRequestHeader("Content-type", "application/json");
     createRequest.send(JSON.stringify({
-        title: title
+        title: title,
+        isComplete: "false"
     }));
     createRequest.onload = function() {
         if (this.status === 201) {
@@ -54,8 +55,17 @@ function reloadTodoList() {
             var compButton = document.createElement("button");
             compButton.textContent = "Complete";
             compButton.onclick = completeListItem;
+            compButton.setAttribute("itemId", todo.id);
             var delButton = document.createElement("button");
             delButton.textContent = "Delete";
+            delButton.className = "delete";
+            if (todo.isComplete === "true") {
+
+            }
+            else {
+                listItem.appendChild(compButton);
+            }
+
             delButton.setAttribute("itemId", todo.id);
             delButton.onclick = deleteListItem;
             listItem.textContent = todo.title;
@@ -84,6 +94,29 @@ function deleteListItem(event) {
 }
 
 function completeListItem(event) {
-    //alert("button pressed");
+    if (event && event.target) {
+        var id = event.target.getAttribute("itemId");
+        if (id) {
+            //updateListItem(id, text, isComplete);
+        }
+    }
+}
+
+function updateListItem(id, text, isComplete) {
+
+    var updateRequest = new XMLHttpRequest();
+    updateRequest.open("PUT", "/api/todo/" + id);
+    updateRequest.onload = function() {
+        if (this.status !== 200) {
+            error.textContent = "Failed to update item. Server returned " +
+                this.status + " - " + this.responseText;
+        }
+        reloadTodoList();
+    };
+    updateRequest.setRequestHeader("Content-type", "application/json");
+    updateRequest.send(JSON.stringify({
+        title: text,
+        isComplete: isComplete
+    }));
 }
 reloadTodoList();

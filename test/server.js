@@ -126,7 +126,8 @@ describe("server", function() {
             request.put({
                 url: todoListUrl + "/" + 0,
                 json: {
-                    title: "This is a item"
+                    title: "This is a item",
+                    isComplete: "true"
                 }
             }, function(error, response) {
                 assert.equal(response.statusCode, 200);
@@ -137,7 +138,8 @@ describe("server", function() {
             request.put({
                 url: todoListUrl + "/" + 3,
                 json: {
-                    title: "This is a TODO item"
+                    title: "This is a TODO item",
+                    isComplete: "true"
                 }
             }, function(error, response) {
                 assert.equal(response.statusCode, 404);
