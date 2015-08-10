@@ -42,7 +42,7 @@ function getTodoList(callback) {
     createRequest.send();
 }
 
-function reloadTodoList() {
+function reloadTodoList(callback) {
     while (todoList.firstChild) {
         todoList.removeChild(todoList.firstChild);
     }
@@ -51,10 +51,22 @@ function reloadTodoList() {
         todoListPlaceholder.style.display = "none";
         todos.forEach(function(todo) {
             var listItem = document.createElement("li");
+            var delButton = document.createElement("input");
+            delButton.type = "button";
+            delButton.value = "Delete Item";
+            //delButton.onClick = deleteListItem;
+            //delButton.onclick = function() { alert("hi!"); };
             listItem.textContent = todo.title;
+            listItem.appendChild(delButton);
             todoList.appendChild(listItem);
         });
     });
+}
+
+function deleteListItem() {
+    alert("onclick Event detected!");
+
+
 }
 
 reloadTodoList();
