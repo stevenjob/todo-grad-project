@@ -126,7 +126,7 @@ describe("server", function() {
             request.put({
                 url: todoListUrl + "/" + 0,
                 json: {
-                    title: "This is a TODO item"
+                    title: "This is a item"
                 }
             }, function(error, response) {
                 assert.equal(response.statusCode, 200);

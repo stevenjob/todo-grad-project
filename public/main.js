@@ -51,8 +51,8 @@ function reloadTodoList() {
         todoListPlaceholder.style.display = "none";
         todos.forEach(function(todo) {
             var listItem = document.createElement("li");
-            listItem.setAttribute("isComplete","false");
-            if(listitem.getAttribute)listItem
+            listItem.setAttribute("isComplete", "false");
+            //if()listItem
             var compButton = document.createElement("button");
             compButton.textContent = "Complete";
             compButton.onclick = completeListItem;
