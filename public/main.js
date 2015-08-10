@@ -51,8 +51,6 @@ function reloadTodoList() {
         todoListPlaceholder.style.display = "none";
         todos.forEach(function(todo) {
             var listItem = document.createElement("li");
-            listItem.setAttribute("isComplete", "false");
-            //if()listItem
             var compButton = document.createElement("button");
             compButton.textContent = "Complete";
             compButton.onclick = completeListItem;
@@ -86,20 +84,6 @@ function deleteListItem(event) {
 }
 
 function completeListItem(event) {
-    if (event && event.target) {
-        var id = event.target.getAttribute("itemId");
-        if (id) {
-            var deleteRequest = new XMLHttpRequest();
-            deleteRequest.open("DELETE", "/api/todo/" + id);
-            deleteRequest.onload = function() {
-                if (this.status !== 200) {
-                    error.textContent = "Failed to delete item. Server returned " +
-                        this.status + " - " + this.responseText;
-                }
-                reloadTodoList();
-            };
-            deleteRequest.send();
-        }
-    }
+    //alert("button pressed");
 }
 reloadTodoList();
