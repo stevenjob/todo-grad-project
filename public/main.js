@@ -42,7 +42,7 @@ function getTodoList(callback) {
     createRequest.send();
 }
 
-function reloadTodoList(callback) {
+function reloadTodoList() {
     while (todoList.firstChild) {
         todoList.removeChild(todoList.firstChild);
     }
@@ -51,11 +51,15 @@ function reloadTodoList(callback) {
         todoListPlaceholder.style.display = "none";
         todos.forEach(function(todo) {
             var listItem = document.createElement("li");
-            var delButton = document.createElement("input");
-            delButton.type = "button";
-            delButton.value = "Delete Item";
-            //delButton.onClick = deleteListItem;
-            //delButton.onclick = function() { alert("hi!"); };
+            listItem.setAttribute("isComplete","false");
+            if(listitem.getAttribute)listItem
+            var compButton = document.createElement("button");
+            compButton.textContent = "Complete";
+            compButton.onclick = completeListItem;
+            var delButton = document.createElement("button");
+            delButton.textContent = "Delete";
+            delButton.setAttribute("itemId", todo.id);
+            delButton.onclick = deleteListItem;
             listItem.textContent = todo.title;
             listItem.appendChild(delButton);
             todoList.appendChild(listItem);
@@ -63,10 +67,39 @@ function reloadTodoList(callback) {
     });
 }
 
-function deleteListItem() {
-    alert("onclick Event detected!");
-
-
+function deleteListItem(event) {
+    if (event && event.target) {
+        var id = event.target.getAttribute("itemId");
+        if (id) {
+            var deleteRequest = new XMLHttpRequest();
+            deleteRequest.open("DELETE", "/api/todo/" + id);
+            deleteRequest.onload = function() {
+                if (this.status !== 200) {
+                    error.textContent = "Failed to delete item. Server returned " +
+                    this.status + " - " + this.responseText;
+                }
+                reloadTodoList();
+            };
+            deleteRequest.send();
+        }
+    }
 }
 
+function completeListItem(event) {
+    if (event && event.target) {
+        var id = event.target.getAttribute("itemId");
+        if (id) {
+            var deleteRequest = new XMLHttpRequest();
+            deleteRequest.open("DELETE", "/api/todo/" + id);
+            deleteRequest.onload = function() {
+                if (this.status !== 200) {
+                    error.textContent = "Failed to delete item. Server returned " +
+                        this.status + " - " + this.responseText;
+                }
+                reloadTodoList();
+            };
+            deleteRequest.send();
+        }
+    }
+}
 reloadTodoList();

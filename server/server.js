@@ -43,12 +43,26 @@ module.exports = function(port, middleware, callback) {
         }
     });
 
-    function deleteTodo() {}
+    // Update
+    app.put("/api/todo/:id", function(req, res) {
+        var update = req.body;
+        var id = req.params.id;
+
+        //if name exists then update else do nothing and send an error code
+        var todo = getTodo(id);
+        if (todo) {
+            todo.title = update.title;
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(404);
+        }
+    });
 
     function getTodo(id) {
         return _.find(todos, function(todo) {
             return todo.id === id;
-        })[0];
+        });
     }
 
     var server = app.listen(port, callback);

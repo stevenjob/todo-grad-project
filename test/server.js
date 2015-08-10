@@ -110,4 +110,39 @@ describe("server", function() {
             });
         });
     });
+    //todo from here
+    describe("update a new todo", function() {
+        beforeEach(function() {
+            request.post({
+                url: todoListUrl,
+                json: {
+                    title: "This is a TODO item"
+                }
+            }, function(error, response) {
+                assert.equal(response.statusCode, 201);
+            });
+        });
+        it("responds with status code 200", function(done) {
+            request.put({
+                url: todoListUrl + "/" + 0,
+                json: {
+                    title: "This is a TODO item"
+                }
+            }, function(error, response) {
+                assert.equal(response.statusCode, 200);
+                done();
+            });
+        });
+        it("responds with status code 404", function(done) {
+            request.put({
+                url: todoListUrl + "/" + 3,
+                json: {
+                    title: "This is a TODO item"
+                }
+            }, function(error, response) {
+                assert.equal(response.statusCode, 404);
+                done();
+            });
+        });
+    });
 });

@@ -91,3 +91,7 @@ module.exports.setupErrorRoute = function(action, route) {
         });
     }
 };
+
+module.exports.deleteTodo = function(id) {
+    driver.findElement(webdriver.By.css("button[itemid='" + id + "' ]")).click();
+};

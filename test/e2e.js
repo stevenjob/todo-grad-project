@@ -65,5 +65,43 @@ testing.describe("end to end", function() {
             });
         });
     });
+    //mod by steven from here
+    testing.describe("on delete todo item", function() {
+        testing.it("adds the todo item then removes it", function() {
+            helpers.navigateToSite();
+            helpers.addTodo("New todo item");
+            helpers.deleteTodo(0);
+            helpers.getTodoList().then(function(elements) {
+                assert.equal(elements.length, 0);
+            });
+
+        });
+
+        testing.it("adds multi todo item then removes them", function() {
+            helpers.navigateToSite();
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.deleteTodo(2);
+            helpers.deleteTodo(1);
+            helpers.deleteTodo(0);
+            helpers.getTodoList().then(function(elements) {
+                assert.equal(elements.length, 1);
+            });
+
+        });
+
+        //testing.it("displays an error if the request fails", function() {
+        //    helpers.setupErrorRoute("delete", "/api/todo/5");
+        //    helpers.navigateToSite();
+        //    helpers.addTodo("New todo item");
+        //    helpers.deleteTodo(0);
+        //    helpers.getErrorText().then(function(text) {
+        //        assert.equal(text, "Failed to create item. Server returned 500 - Internal Server Error");
+        //    });
+        //});
+
+    });
 });
 
