@@ -8,7 +8,7 @@
       <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="less" />
       <option name="immediateSync" value="true" />
-      <option name="name" value="Less" />
+      <option name="name" value="watcher" />
       <option name="output" value="$FileNameWithoutExtension$.css" />
       <option name="outputFilters">
         <array>
@@ -24,7 +24,7 @@
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/lessc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$FileDir$" />
+      <option name="workingDir" value="C:\Dev\todo-grad-project" />
       <envs />
     </TaskOptions>
   </component>

@@ -5,6 +5,7 @@
         <title>TODO List</title>
         <link href="main.css" rel="stylesheet" type="text/css">
         <link rel="icon" type="image/ico" href="favicon.ico">
+        <script src="node_modules/whatwg-fetch/fetch.js"></script>
     </head>
     <body>
         <header>
@@ -18,14 +19,14 @@
             <ul id="todo-list"></ul>
             <form id="todo-form">
                 <input id="new-todo" placeholder="What needs to be done?" autofocus>
-                <input id="submit-todo" type="submit" value="Create">
+                <input id="submit-todo" class="button"  type="submit" value="Create">
             </form>
             <div id="error"></div>
         </section>
         <section>
-            <input id="set-all" type="submit" value="All">
-            <input id="set-active" type="submit" value="Active">
-            <input id="set-completed" type="submit" value="Completed">
+            <input id="set-all" class="button" type="submit" value="All">
+            <input id="set-active" class="button" type="submit" value="Active">
+            <input id="set-completed" class="button" type="submit" value="Completed">
         </section>
         <script type="text/javascript" src="main.js"></script>
     </body>
