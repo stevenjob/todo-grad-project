@@ -48,12 +48,11 @@ module.exports = function(port, middleware, callback) {
     app.put("/api/todo/:id", function(req, res) {
         var update = req.body;
         var id = req.params.id;
-
         //if exists then update else do nothing and send an error code
         var todo = getTodo(id);
-        if (todo && (todo.title !== update.title)) {
-            todo.title = update.title;
-            todo.isComplete = update.isComplete;
+        if (todo) {
+            todo.title = update.title || todo.title;
+            todo.isComplete = update.isComplete || todo.isComplete;
             res.sendStatus(200);
         }
         else {

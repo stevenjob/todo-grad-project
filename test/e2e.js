@@ -92,5 +92,50 @@ testing.describe("end to end", function() {
             });
         });
     });
+
+    testing.describe("on update the items", function() {
+        testing.it("completes single item", function() {
+            helpers.navigateToSite();
+            helpers.addTodo("New todo item");
+            helpers.completeTodo(0);
+        });
+        testing.it("adds multi todo item then completes them", function() {
+            helpers.navigateToSite();
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.navigateToSite();
+            helpers.completeTodo(2);
+            helpers.completeTodo(1);
+            helpers.completeTodo(0);
+        });
+    });
+
+    testing.describe("on delete all completed items", function() {
+        testing.it("delete a completed using button", function() {
+            helpers.navigateToSite();
+            helpers.addTodo("New todo item");
+            helpers.navigateToSite();
+            helpers.completeTodo(0);
+            helpers.navigateToSite();
+            helpers.deleteAllCompTodo();
+            helpers.getTodoList().then(function(elements) {
+                assert.equal(elements.length, 0);
+            });
+        });
+        testing.it("delete multi completed", function() {
+            helpers.navigateToSite();
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.addTodo("New todo item");
+            helpers.completeTodo(2);
+            helpers.completeTodo(1);
+            helpers.deleteAllCompTodo();
+            helpers.getTodoList().then(function(elements) {
+                assert.equal(elements.length, 2);
+            });
+        });
+    });
 });
 
