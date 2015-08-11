@@ -110,9 +110,9 @@ describe("server", function() {
             });
         });
     });
-    //todo from here
+    ////todo from here
     describe("update a new todo", function() {
-        beforeEach(function() {
+        beforeEach(function(done) {
             request.post({
                 url: todoListUrl,
                 json: {
@@ -121,6 +121,7 @@ describe("server", function() {
             }, function(error, response) {
                 assert.equal(response.statusCode, 201);
             });
+            done();
         });
         it("responds with status code 200", function(done) {
             request.put({
@@ -129,8 +130,22 @@ describe("server", function() {
                     title: "This is a item",
                     isComplete: true
                 }
-            }, function(error, response) {
+            }, function(error, response, body) {
                 assert.equal(response.statusCode, 200);
+                assert.equal(body, "OK");
+                done();
+            });
+        });
+        it("responds with status code 200", function(done) {
+            request.put({
+                url: todoListUrl + "/" + 0,
+                json: {
+                    title: "This is a updated item",
+                    isComplete: false
+                }
+            }, function(error, response, body) {
+                assert.equal(response.statusCode, 200);
+                assert.equal(body, "OK");
                 done();
             });
         });
@@ -141,8 +156,18 @@ describe("server", function() {
                     title: "This is a TODO item",
                     isComplete: true
                 }
-            }, function(error, response) {
+            }, function(error, response, body) {
                 assert.equal(response.statusCode, 404);
+                assert.equal(body, "Not Found");
+                done();
+            });
+        });
+        it("responds with status code 404", function(done) {
+            request.put({
+                url: todoListUrl + "/"
+            }, function(error, response, body) {
+                assert.equal(response.statusCode, 404);
+                assert.equal(body, "Cannot PUT /api/todo/\n");
                 done();
             });
         });
