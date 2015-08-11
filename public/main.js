@@ -4,6 +4,7 @@ var form = document.getElementById("todo-form");
 var todoTitle = document.getElementById("new-todo");
 var error = document.getElementById("error");
 var itemsLeftDiv = document.getElementById("count-label");
+var filterVal = -1;
 
 form.onsubmit = function(event) {
     var title = todoTitle.value;
@@ -57,29 +58,33 @@ function reloadTodoList() {
         var itemsLeft = 0;
         var completedItems = 0;
         todos.forEach(function(todo) {
-            var listItem = document.createElement("li");
-            var compButton = document.createElement("button");
-            compButton.textContent = "Complete";
-            compButton.onclick = completeListItem;
-            compButton.setAttribute("itemId", todo.id);
-            var delButton = document.createElement("button");
-            delButton.textContent = "Delete";
-            delButton.className = "delete";
-            delButton.setAttribute("itemId", todo.id);
-            delButton.onclick = deleteListItemEvent;
-            listItem.textContent = todo.title;
-            if (todo.isComplete === true) {
-                completedItems++;
-                listItem.className = "complete";
+            console.log(filterVal===-1 || +todo.isComplete===filterVal);
+            if(filterVal===-1 || +todo.isComplete===filterVal) {
+
+                var listItem = document.createElement("li");
+                var compButton = document.createElement("button");
+                compButton.textContent = "Complete";
+                compButton.onclick = completeListItem;
+                compButton.setAttribute("itemId", todo.id);
+                var delButton = document.createElement("button");
+                delButton.textContent = "Delete";
+                delButton.className = "delete";
+                delButton.setAttribute("itemId", todo.id);
+                delButton.onclick = deleteListItemEvent;
+                listItem.textContent = todo.title;
+                if (todo.isComplete === true) {
+                    completedItems++;
+                    listItem.className = "complete";
+                }
+                else {
+                    itemsLeft++;
+                    compButton.className = "set-comp-button";
+                    listItem.appendChild(compButton);
+                }
+                listItem.appendChild(delButton);
+                todoList.appendChild(listItem);
+                itemsLeftDiv.textContent = itemsLeft + " items left to complete";
             }
-            else {
-                itemsLeft++;
-                compButton.className = "set-comp-button";
-                listItem.appendChild(compButton);
-            }
-            listItem.appendChild(delButton);
-            todoList.appendChild(listItem);
-            itemsLeftDiv.textContent = itemsLeft + " items left to complete";
         });
         if (completedItems > 0) {
             var topDiv = document.getElementById("top-div");
@@ -90,6 +95,12 @@ function reloadTodoList() {
             delCompButton.onclick = deleteAllCompleted(todos);
             topDiv.appendChild(delCompButton);
         }
+        var setAll = document.getElementById("set-all");
+        setAll.onclick = changeFilter(-1);
+        var setActive = document.getElementById("set-active");
+        setActive.onclick = changeFilter(0);
+        var setCompleted = document.getElementById("set-completed");
+        setCompleted.onclick = changeFilter(1);
     });
 }
 
@@ -102,6 +113,29 @@ function deleteAllCompleted(todos) {
         });
         reloadTodoList();
     };
+}
+
+function changeFilter(filter){
+    return function() {
+        switch (filter)
+        {
+            case -1:
+
+                alert('boom');
+                break;
+            case 0:
+                alert('oy');
+                break;
+            case 1:
+                alert('Hey');
+                break;
+            default:
+                alert('problem');
+                break;
+        }
+        filterVal = filter;
+        reloadTodoList();
+    }
 }
 
 function deleteListItemEvent(event) {
