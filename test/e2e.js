@@ -83,6 +83,7 @@ testing.describe("end to end", function() {
             helpers.addTodo("New todo item");
             helpers.addTodo("New todo item");
             helpers.addTodo("New todo item");
+            helpers.navigateToSite();
             helpers.deleteTodo(2);
             helpers.deleteTodo(1);
             helpers.deleteTodo(0);

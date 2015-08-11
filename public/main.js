@@ -19,7 +19,7 @@ function createTodo(title, callback) {
     createRequest.setRequestHeader("Content-type", "application/json");
     createRequest.send(JSON.stringify({
         title: title,
-        isComplete: "false"
+        isComplete: false
     }));
     createRequest.onload = function() {
         if (this.status === 201) {
@@ -56,19 +56,20 @@ function reloadTodoList() {
             compButton.textContent = "Complete";
             compButton.onclick = completeListItem;
             compButton.setAttribute("itemId", todo.id);
+            //
             var delButton = document.createElement("button");
             delButton.textContent = "Delete";
             delButton.className = "delete";
+            delButton.setAttribute("itemId", todo.id);
+            delButton.onclick = deleteListItem;
+            listItem.textContent = todo.title;
             if (todo.isComplete === "true") {
-
+                compButton.textContent = "Uncomplete";
+                listItem.appendChild(compButton);
             }
             else {
                 listItem.appendChild(compButton);
             }
-
-            delButton.setAttribute("itemId", todo.id);
-            delButton.onclick = deleteListItem;
-            listItem.textContent = todo.title;
             listItem.appendChild(delButton);
             todoList.appendChild(listItem);
         });

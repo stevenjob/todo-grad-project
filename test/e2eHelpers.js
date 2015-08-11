@@ -93,5 +93,7 @@ module.exports.setupErrorRoute = function(action, route) {
 };
 
 module.exports.deleteTodo = function(id) {
+    var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
+    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
     driver.findElement(webdriver.By.css(".delete[itemid='" + id + "' ]")).click();
 };
