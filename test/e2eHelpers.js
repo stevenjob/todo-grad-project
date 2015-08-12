@@ -107,6 +107,6 @@ module.exports.deleteTodo = function(id) {
 module.exports.deleteAllCompTodo = function() {
     var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
     driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".del-comp-btn")).click();
+    driver.findElement(webdriver.By.css("#del-comp-btn")).click();
 };
 
