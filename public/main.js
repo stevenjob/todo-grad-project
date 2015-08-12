@@ -54,8 +54,8 @@ function reloadTodoList() {
     while (todoList.firstChild) {
         todoList.removeChild(todoList.firstChild);
     }
-    if (document.getElementById("delete-completed")) {
-        document.getElementById("comp-but-div").removeChild(document.getElementById("delete-completed"));
+    if (document.getElementById("del-comp-btn")) {
+        document.getElementById("comp-but-div").removeChild(document.getElementById("del-comp-btn"));
     }
     todoListPlaceholder.style.display = "block";
     getTodoList(function(todos) {
@@ -67,44 +67,15 @@ function reloadTodoList() {
                 itemsLeft++;
             }
             if (filterVal === -1 || +todo.isComplete === filterVal) {
-                var listItem = document.createElement("li");
-                var compButton = document.createElement("button");
-                compButton.textContent = "Complete";
-                compButton.onclick = completeListItem;
-                compButton.setAttribute("itemId", todo.id);
-                var delButton = document.createElement("button");
-                delButton.textContent = "Delete";
-                delButton.className = "delete button";
-                delButton.setAttribute("itemId", todo.id);
-                delButton.onclick = deleteListItemEvent;
-                var titleDiv = document.createElement("section");
-                titleDiv.id = "title-div";
-                titleDiv.textContent = todo.title;
-                listItem.appendChild(titleDiv);
-                if (todo.isComplete) {
-                    compButton.textContent = "Completed";
-                    titleDiv.className = "complete";
-                    compButton.className = "completed-button";
-                    completedItems++;
-                    compButton.disabled = true;
-                }
-                else {
-                    compButton.className = "button";
-                    compButton.disabled = false;
-                    compButton.className = "set-comp-button button";
-                }
-                listItem.appendChild(compButton);
-                listItem.appendChild(delButton);
-                todoList.appendChild(listItem);
+                completedItems = makeTodoOnScreen(todo, completedItems);
             }
-
         });
         if (completedItems > 0) {
             var compButDiv = document.getElementById("comp-but-div");
             var delCompButton = document.createElement("button");
             delCompButton.textContent = "Delete Completed";
-            delCompButton.id = "delete-completed";
-            delCompButton.className = "delete-completed del-comp-button";
+            delCompButton.className = "btn-warning del-comp-btn";
+            delCompButton.id = "del-comp-btn";
             delCompButton.onclick = deleteAllCompleted(todos);
             compButDiv.appendChild(delCompButton);
         }
@@ -116,6 +87,55 @@ function reloadTodoList() {
         setCompleted.onclick = changeFilter(1);
         itemsLeftDiv.textContent = itemsLeft + " items left to complete";
     });
+}
+
+function makeTodoOnScreen(todo, completedItems) {
+    var compdItems = completedItems; //used for counting items left
+    var listItem = document.createElement("li");
+    var titleDiv = document.createElement("section");
+
+    var liButtonDiv = document.createElement("section");
+    var liCompButtonDiv = document.createElement("section");
+    var liDeleteButtonDiv = document.createElement("section");
+
+    var compButton = document.createElement("button");
+    var delButton = document.createElement("button");
+
+    titleDiv.id = "title-div";
+    liCompButtonDiv.className = "li-div";
+    liButtonDiv.className = "li-div-holder";
+    liDeleteButtonDiv.className = "li-div";
+    titleDiv.textContent = todo.title;
+
+    compButton.textContent = "Complete";
+    compButton.setAttribute("itemId", todo.id);
+
+    delButton.textContent = "Delete";
+    delButton.className = "delete-btn btn-warning";
+    delButton.setAttribute("itemId", todo.id);
+    delButton.onclick = deleteListItemEvent;
+
+    if (todo.isComplete) {
+        compButton.textContent = "Completed";
+        titleDiv.className += "completed-txt";
+        compButton.className = "btn-active btn-warning completed-btn";
+        compButton.disabled = true;
+        compdItems++;
+    }
+    else {
+        compButton.onclick = completeListItem;
+        compButton.disabled = false;
+        compButton.className = "complete-btn btn-warning";
+    }
+
+    listItem.appendChild(titleDiv);
+    liCompButtonDiv.appendChild(compButton);
+    liDeleteButtonDiv.appendChild(delButton);
+    liButtonDiv.appendChild(liCompButtonDiv);
+    liButtonDiv.appendChild(liDeleteButtonDiv);
+    listItem.appendChild(liButtonDiv);
+    todoList.appendChild(listItem);
+    return compdItems;
 }
 
 function deleteAllCompleted(todos) {

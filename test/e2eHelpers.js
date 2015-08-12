@@ -95,18 +95,18 @@ module.exports.setupErrorRoute = function(action, route) {
 module.exports.completeTodo = function(id) {
     var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
     driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".set-comp-button[itemid='" + id + "' ]")).click();
+    driver.findElement(webdriver.By.css(".complete-btn[itemid='" + id + "' ]")).click();
 };
 
 module.exports.deleteTodo = function(id) {
     var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
     driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".delete[itemid='" + id + "' ]")).click();
+    driver.findElement(webdriver.By.css(".delete-btn[itemid='" + id + "' ]")).click();
 };
 
 module.exports.deleteAllCompTodo = function() {
     var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
     driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".delete-completed")).click();
+    driver.findElement(webdriver.By.css(".del-comp-btn")).click();
 };
 
