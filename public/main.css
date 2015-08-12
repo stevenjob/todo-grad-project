@@ -64,9 +64,9 @@ li {
     /*padding: 10px;*/
     /*margin-top: 20px;*/
 }
-/*#top-div {*/
-    /*height:55px;*/
-/*}*/
+#top-div {
+    height:55px;
+}
 #comp-but-div {
     display:inline-block;
     margin-left: 40px;
