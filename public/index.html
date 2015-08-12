@@ -3,30 +3,35 @@
     <head>
         <meta charset="utf-8">
         <title>TODO List</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="main.css" rel="stylesheet" type="text/css">
         <link rel="icon" type="image/ico" href="favicon.ico">
-        <script src="node_modules/whatwg-fetch/fetch.js"></script>
+        <script src="/fetch/fetch.js"></script>
     </head>
     <body>
         <header>
             <h1>TODO List</h1>
         </header>
-        <div id="top-div">
-            <div id="count-label"></div>
+        <div id="top-div" >
+            <div id="count-label" class="text-center"></div>
+            <div id="comp-but-div"></div>
         </div>
-        <section>
+        <section class="col-md-8">
             <h2 id="todo-list-placeholder">Loading...</h2>
             <ul id="todo-list"></ul>
-            <form id="todo-form">
+        </section>
+        <section class="col-md-4 bottom-div">
+            <div><h3>Filter</h3>
+            <input id="set-all" class="button" type="submit" value="All">
+            <input id="set-active" class="button" type="submit" value="Active">
+            <input id="set-completed" class="button" type="submit" value="Completed">
+                </div>
+
+            <form id="todo-form"><h3>New</h3>
                 <input id="new-todo" placeholder="What needs to be done?" autofocus>
                 <input id="submit-todo" class="button"  type="submit" value="Create">
             </form>
             <div id="error"></div>
-        </section>
-        <section>
-            <input id="set-all" class="button" type="submit" value="All">
-            <input id="set-active" class="button" type="submit" value="Active">
-            <input id="set-completed" class="button" type="submit" value="Completed">
         </section>
         <script type="text/javascript" src="main.js"></script>
     </body>

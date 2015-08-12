@@ -9,8 +9,7 @@ header {
     background-color: #FFE76A;
     padding: 0.5em 1em;
 }
-section,
-h1 {
+section {
     max-width: 1170px;
     margin-left: auto;
     margin-right: auto;
@@ -19,89 +18,148 @@ h1 {
 
 h1 {
     display: block;
+    margin-left: 100px;
     font-size: 34px;
-    line-height: 34px;
+    line-height: 30px;
     color: #005db3;
 }
 
-#title-div {
-    width: 470px;
-    display:inline-block;
-
+h3 {
+    color: #FFE76A;
 }
-.set-comp-button{
 
+li {
+    height:52px;
+}
+
+#title-div {
+    display:inline-block;
+    color: #FFE76A;
+}
+
+/*/!*.complete {*!/*/
+    /*/!*background-color: #005fb3;*!/*/
+    /*/!*text-decoration: line-through;*!/*/
+    /*/!*color: #FFE76A;*!/*/
+/*/!*}*!/*/
+
+#count-label {
+    display: inline-block;
+    color: #FFE76A;
+    margin-left: 40px;
+    padding: 10px;
+    margin-top: 20px;
+}
+#top-div {
+    height:55px;
+}
+#comp-but-div {
+    display:inline-block;
+    margin-left: 40px;
+ }
+/*#todo-list {*/
+    /*/!*height: 350px;*!/*/
+    /*min-height: 400px;*/
+    /*max-height: 400px;*/
+    /*/!*overflow-y: auto;*!/*/
+/*}*/
+
+/*#new-todo {*/
+     /*padding: 10px;*/
+     /*border: solid 1px #dcdcdc;*/
+     /*transition: box-shadow 0.3s, border 0.3s;*/
+ /*}*/
+/*#bottom-div {*/
+    /*bottom: 0px;*/
+    /*border: solid 1px #dcdcdc;*/
+    /*transition: box-shadow 0.3s, border 0.3s;*/
+/*}*/
+/*#new-todo :focus{*/
+    /*border: solid 1px #707070;*/
+    /*box-shadow: 0 0 10px 3px #969696;*/
+/*}*/
+
+.completed-button {
+    background-color:#FFE76A;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:13px;
+    border:0px solid #ffaa22;
+    display:inline-block;
+    cursor:pointer;
+    color:#FF0000;
+    padding:10px 22px;
+    font-weight:bold;
+    padding:10px 22px;
+    text-shadow:0px 0px 0px #fffff6;
+    margin-top:10px;
+    margin-left:10px;
+    margin-right:10px;
+    width: 110px;
+    height:40px;
 }
 
 .button {
-    -moz-box-shadow: 1px -4px 12px 2px #fff6af;
-    -webkit-box-shadow: 1px -4px 12px 2px #fff6af;
-    box-shadow: 1px -4px 12px 2px #fff6af;
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
-    background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-    background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-    background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-    background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
-    background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+    -moz-box-shadow: 1px -2px 12px 1px #fff6af;
+    -webkit-box-shadow: 1px -2px 12px 1px #fff6af;
+    /*box-shadow: 1px -4px 12px 2px #fff6af;*/
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
     background-color:#ffec64;
     -moz-border-radius:13px;
     -webkit-border-radius:13px;
     border-radius:13px;
-    border:2px solid #ffaa22;
+    /*border:2px solid #ffaa22;*/
     display:inline-block;
     cursor:pointer;
     color:#333333;
     font-family:Arial;
-    font-size:15px;
     font-weight:bold;
     padding:10px 22px;
     text-decoration:none;
     text-shadow:1px -1px 8px #ffee66;
+    margin-top:10px;
+    margin-left:10px;
+    margin-right:10px;
+    width: 110px;
+    height:40px;
 }
+
+.del-comp-button {
+    -moz-box-shadow: 1px -2px 12px 1px #fff6af;
+    -webkit-box-shadow: 1px -2px 12px 1px #fff6af;
+    /*box-shadow: 1px -4px 12px 2px #fff6af;*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+    background-color:#ffec64;
+    -moz-border-radius:13px;
+    -webkit-border-radius:13px;
+    border-radius:13px;
+    /*border:2px solid #ffaa22;*/
+    display:inline-block;
+    cursor:pointer;
+    color:#333333;
+    font-family:Arial;
+    font-weight:bold;
+    padding:10px 22px;
+    text-decoration:none;
+    text-shadow:1px -1px 8px #ffee66;
+    margin-top:10px;
+    margin-left:10px;
+    margin-right:10px;
+    width: 220px;
+    height:40px;
+}
+
+
 .button:hover {
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
-    background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-    background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-    background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-    background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
-    background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
     background-color:#ffab23;
 }
 
-
-a {
-    display: block;
-    font-size: 18px;
-    border: 2px solid gray;
-    border-radius: 100px;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
+.button:active {
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+    background-color:#ffab23;
 }
-button:active {
-    color: #FFE76A;
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
-    background:linear-gradient(to bottom, #afec64 5%, #ffab23 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
-    background-color:#afec64;
-    -moz-border-radius:13px;
-    -webkit-border-radius:13px;
-    border-radius:13px;
-    border:2px solid #ffaa22;
-    display:inline-block;
-    cursor:pointer;
-    color:#333333;
-    font-family:Arial;
-    font-size:15px;
-    font-weight:bold;
-    padding:10px 22px;
-    text-decoration:none;
-    text-shadow:1px -1px 8px #ffee66;
-}
-button:target {
+.button:target {
     font-size: 18px;
     border: 2px solid red;
     border-radius: 100px;
@@ -109,13 +167,8 @@ button:target {
     height: 100px;
 }
 
-.complete {
-//font-size: 34px;
-    background-color: #005fb3;
-    text-decoration: line-through;
-    color: #FFE76A;
+@media only screen and (max-width: 500px) {
+
 }
 
-#count-label {
-    display: inline-block;
-}
+
