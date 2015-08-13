@@ -1,86 +1,86 @@
-/*body {*/
+body {
+    background-color: #005fb3;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: #FFE76A;
+    padding: 0.5em 1em;
+}
+section {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    display: block;
+    margin-left: 100px;
+    font-size: 34px;
+    line-height: 30px;
+    color: #005db3;
+}
+
+h3 {
+    color: #FFE76A;
+}
+
+li {
+    height:52px;
+}
+
+.li-div {
+    display:inline-block;
+    color: #FFE76A;
+    width:95px;
+    margin: 10px;
+}
+.li-div-holder {
+    display:inline-block;
+    color: #FFE76A;
+}
+.li-div button {
+    width: 100%;
+}
+
+#title-div {
+    display:inline-block;
+    color: #ffe76a;
+    width: 300px;
+}
+
+.completed-txt {
     /*background-color: #005fb3;*/
-    /*color: rgba(0, 0, 0, 0.87);*/
-    /*font-family: sans-serif;*/
-    /*margin: 0;*/
-/*}*/
+    text-decoration: line-through;
+    color: #FFE76A;
+}
 
-/*header {*/
-    /*background-color: #FFE76A;*/
-    /*padding: 0.5em 1em;*/
-/*}*/
-/*section {*/
-    /*max-width: 1170px;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-/*}*/
+#count-label {
+    display: inline-block;
+    color: #FFE76A;
+    margin-left: 40px;
+    /*padding: 10px;*/
+    /*margin-top: 20px;*/
+}
+#top-div {
+    height:55px;
+}
+#comp-but-div {
+    display:inline-block;
+    margin-left: 40px;
+ }
+#todo-list {
+    list-style-type: none;
+}
 
-/*h1 {*/
-    /*display: block;*/
-    /*margin-left: 100px;*/
-    /*font-size: 34px;*/
-    /*line-height: 30px;*/
-    /*color: #005db3;*/
-/*}*/
+.completed-btn {
+    border-radius: 3px;
+}
 
-/*h3 {*/
-    /*color: #FFE76A;*/
-/*}*/
-
-/*li {*/
-    /*height:52px;*/
-/*}*/
-
-/*.li-div {*/
-    /*display:inline-block;*/
-    /*color: #FFE76A;*/
-    /*width:95px;*/
-    /*margin: 10px;*/
-/*}*/
-/*.li-div-holder {*/
-    /*display:inline-block;*/
-    /*color: #FFE76A;*/
-/*}*/
-/*.li-div button {*/
-    /*width: 100%;*/
-/*}*/
-
-/*#title-div {*/
-    /*display:inline-block;*/
-    /*color: #ffe76a;*/
-    /*width: 300px;*/
-/*}*/
-
-/*.completed-txt {*/
-    /*/!*background-color: #005fb3;*!/*/
-    /*text-decoration: line-through;*/
-    /*color: #FFE76A;*/
-/*}*/
-
-/*#count-label {*/
-    /*display: inline-block;*/
-    /*color: #FFE76A;*/
-    /*margin-left: 40px;*/
-    /*/!*padding: 10px;*!/*/
-    /*/!*margin-top: 20px;*!/*/
-/*}*/
-/*#top-div {*/
-    /*height:55px;*/
-/*}*/
-/*#comp-but-div {*/
-    /*display:inline-block;*/
-    /*margin-left: 40px;*/
- /*}*/
-/*#todo-list {*/
-    /*list-style-type: none;*/
-/*}*/
-
-/*.completed-btn {*/
-    /*border-radius: 3px;*/
-/*}*/
-
-/*button {*/
-    /*border-radius: 3px;*/
-    /*margin-top: 10px;*/
-    /*margin-left: 10px;*/
-/*}*/
+button {
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
