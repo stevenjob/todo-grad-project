@@ -123,16 +123,15 @@ describe("server", function() {
             });
             done();
         });
-        it("responds with status code 200", function(done) {
+        it("responds with status code 200 when update new item", function(done) {
             request.put({
                 url: todoListUrl + "/" + 0,
                 json: {
-                    title: "This is a item",
+                    title: "This is a new item",
                     isComplete: true
                 }
-            }, function(error, response, body) {
+            }, function(error, response) {
                 assert.equal(response.statusCode, 200);
-                assert.equal(body, "OK");
                 done();
             });
         });
@@ -145,7 +144,6 @@ describe("server", function() {
                 }
             }, function(error, response, body) {
                 assert.equal(response.statusCode, 200);
-                assert.equal(body, "OK");
                 done();
             });
         });

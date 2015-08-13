@@ -126,11 +126,9 @@ testing.describe("end to end", function() {
         testing.it("delete multi completed", function() {
             helpers.navigateToSite();
             helpers.addTodo("New todo item");
-            helpers.addTodo("New todo item");
-            helpers.addTodo("New todo item");
-            helpers.addTodo("New todo item");
-            helpers.completeTodo(2);
-            helpers.completeTodo(1);
+            helpers.addTodo("New todo item 2");
+            helpers.addTodo("New todo item 3");
+            helpers.completeTodo(0);
             helpers.deleteAllCompTodo();
             helpers.getTodoList().then(function(elements) {
                 assert.equal(elements.length, 2);
