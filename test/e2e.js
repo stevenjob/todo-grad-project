@@ -119,6 +119,7 @@ testing.describe("end to end", function() {
             helpers.completeTodo(0);
             helpers.navigateToSite();
             helpers.deleteAllCompTodo();
+            helpers.navigateToSite();
             helpers.getTodoList().then(function(elements) {
                 assert.equal(elements.length, 0);
             });
@@ -127,8 +128,11 @@ testing.describe("end to end", function() {
             helpers.navigateToSite();
             helpers.addTodo("New todo item");
             helpers.addTodo("New todo item 2");
+            helpers.navigateToSite();
             helpers.addTodo("New todo item 3");
+            helpers.navigateToSite();
             helpers.completeTodo(0);
+            helpers.navigateToSite();
             helpers.deleteAllCompTodo();
             helpers.getTodoList().then(function(elements) {
                 assert.equal(elements.length, 2);
