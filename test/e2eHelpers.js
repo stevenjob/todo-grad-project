@@ -102,11 +102,14 @@ module.exports.deleteTodo = function(id) {
     var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
     driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
     driver.findElement(webdriver.By.css(".delete-btn[itemid='" + id + "' ]")).click();
+    var todoListPlaceholde = driver.findElement(webdriver.By.id("todo-list-placeholder"));
+    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholde), 5000);
 };
 
 module.exports.deleteAllCompTodo = function() {
     var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
     driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
     driver.findElement(webdriver.By.css(".del-comp-btn")).click();
+    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
 };
 
