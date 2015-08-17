@@ -31,15 +31,24 @@ angular.module('myApp.view1', ['ngRoute'])
 
 
         $scope.getTodoList = function () {
+            $scope.isLoading = true;
             $http.get("/api/todo").then(function(response) {
                 if (response.status === 200) {
                     $scope.todos = response.data;
+                    $scope.isLoading = false;
+                    $scope.$calcItemNumbers();
                 }
                 else {
                     error.textContent = "Failed to get list. Server returned " + response.status + " - " + response.statusText;
                 }
             });
         }
+
+        $scope.$calcItemNumbers = function() {
+            $scope.itemsLeft = $scope.todos.filter(function(todo) {
+                return !todo.isComplete;
+            }).length;
+        };
 
         $scope.completeTodo = function (todo){
             updateTodo(todo.id, true, todo.text);
