@@ -1,0 +1,46 @@
+<header>
+    <h1>TODO List</h1>
+</header>
+<div id="top-div" class="row" >
+    <div id="count-label" class="text-center col-md-5"> There {{itemsLeft === 1 ? "is" : "are"}} {{itemsLeft}}
+        item{{itemsLeft === 1 ? "" : "s"}}
+        left to do
+    </div>
+    <div id="comp-but-div" class="col-md-5">
+        
+    </div>
+</div>
+<div class="row">
+    <section class="col-md-8">
+        <h2 id="todo-list-placeholder" ng-show="isLoading">Loading...</h2>
+        <ul id="todo-list" class="col-md-8">
+            <li  ng-repeat="todo in todos">
+                <section id="title-div">{{todo.title}}</section>
+                <section class="li-div-holder">
+                    <section class="li-div">
+                        <button class="complete-btn btn-warning" ng-click="completeTodo(todo)" itemid={{todo.id}}>{{todo.isComplete ? "Completed" :"Complete" }} </button>
+                    </section>
+                    <section class="li-div">
+                        <button class="delete-btn btn-warning" ng-click="deleteTodo(todo)" itemid={{todo.id}}>Delete</button>
+                    </section>
+                </section>
+            </li>
+        </ul>
+    </section>
+    <section class="col-md-4">
+        <div>
+            <h3>Filter</h3>
+            <input id="set-all" class="btn-warning" type="submit" value="All">
+            <input id="set-active" class="btn-warning" type="submit" value="Active">
+            <input id="set-completed" class="btn-warning" type="submit" value="Completed">
+        </div>
+        <div>
+            <h3>New</h3>
+            <form id="todo-form">
+                <input id="new-todo" placeholder="What needs to be done?" ng-model="newTodoCreate" autofocus>
+                <input id="submit-todo" class="btn-warning"  ng-click="createTodo()" type="submit" value="Create">
+            </form>
+        </div>
+        <div id="error"></div>
+    </section>
+</div>
