@@ -17,7 +17,7 @@
                 <span>
                     <input id="toggle-all" type="checkbox" >
                     <form id="todo-form">
-                        <input id="new-todo" placeholder="What needs to be done?" autofocus>
+                        <input type="text" id="new-todo" class="main-input" placeholder="What needs to be done?" autofocus>
                     </form>
                     <div id="error"></div>
                 </span>
@@ -25,7 +25,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <h2 id="todo-list-placeholder">Loading...</h2>
                 <ul id="todo-list"></ul>
             </div>
         </div>
@@ -38,9 +37,13 @@
                 <div id="comp-but-div"></div>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <h2 id="loading">Loading...</h2>
+            </div>
+        </div>
+
     </section>
-
-
-        <script type="text/javascript" src="main.js"></script>
-    </body>
-    </html>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>

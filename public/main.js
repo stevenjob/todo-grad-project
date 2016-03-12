@@ -1,20 +1,29 @@
 var todoList = document.getElementById("todo-list");
-var todoListPlaceholder = document.getElementById("todo-list-placeholder");
+var loader = document.getElementById("loading");
 var form = document.getElementById("todo-form");
-var todoTitle = document.getElementById("new-todo");
+var newTodoInput = document.getElementById("new-todo");
 var error = document.getElementById("error");
 var itemsLeftDiv = document.getElementById("count-label");
 var filterVal = -1;
 
+/**
+ * Runs on when user presses enter on add todo form
+ * @param event
+ */
 form.onsubmit = function(event) {
-    var title = todoTitle.value;
-    createTodo(title, function() {
-        reloadTodoList();
-    });
-    todoTitle.value = "";
-    event.preventDefault();
+    var title = newTodoInput.value; //TODO whats in this object
+    createTodo(title, reloadTodoList);
+    //clears the input box
+    newTodoInput.value = "";
+    event.preventDefault();//TODO what does this do
 };
 
+/**
+ * send a post request to the server to create the todo item
+ * then invokes the callback function if successful
+ * @param title of todo item
+ * @param {Function} callback
+ */
 function createTodo(title, callback) {
     fetch("/api/todo", {
         method: "post",
@@ -51,91 +60,98 @@ function getTodoList(callback) {
 }
 
 function reloadTodoList() {
+
+    //cleanup all the old todo items
     while (todoList.firstChild) {
         todoList.removeChild(todoList.firstChild);
     }
+
+    //remove delete all button
     if (document.getElementById("del-comp-btn")) {
         document.getElementById("comp-but-div").removeChild(document.getElementById("del-comp-btn"));
     }
-    todoListPlaceholder.style.display = "block";
-    getTodoList(function(todos) {
-        todoListPlaceholder.style.display = "none";
-        var itemsLeft = 0;
-        var completedItems = 0;
-        todos.forEach(function(todo) {
-            if (!todo.isComplete) {
-                itemsLeft++;
-            }
-            if (filterVal === -1 || +todo.isComplete === filterVal) {
-                completedItems = makeTodoOnScreen(todo, completedItems);
-            }
-        });
-        if (completedItems > 0) {
-            var compButDiv = document.getElementById("comp-but-div");
-            var delCompButton = document.createElement("button");
-            delCompButton.textContent = "Delete Completed";
-            delCompButton.className = "btn-warning del-comp-btn";
-            delCompButton.id = "del-comp-btn";
-            delCompButton.onclick = deleteAllCompleted(todos);
-            compButDiv.appendChild(delCompButton);
-        }
-        var setAll = document.getElementById("set-all");
-        setAll.onclick = changeFilter(-1);
-        var setActive = document.getElementById("set-active");
-        setActive.onclick = changeFilter(0);
-        var setCompleted = document.getElementById("set-completed");
-        setCompleted.onclick = changeFilter(1);
-        itemsLeftDiv.textContent = itemsLeft + " items left to complete";
-    });
+
+    //add loading text
+    loader.style.display = "block";
+//////////////////////////////////////
+
+    //get todo list from server
+    getTodoList(formatList);
+
 }
 
-function makeTodoOnScreen(todo, completedItems) {
-    var compdItems = completedItems; //used for counting items left
+
+function formatList(todos) {
+
+    //hide loading text
+    loader.style.display = "none";
+
+    //used to calc the items left to display to the user
+    var itemsLeft = 0;
+    var completedItems = 0;
+    todos.forEach(function(todo) {
+
+        //if not complete then items are left
+        if (!todo.isComplete) {
+            itemsLeft++;
+        } else {
+            completedItems++;
+        }
+
+        if (filterVal === -1 || +todo.isComplete === filterVal) {
+            makeTodoOnScreen(todo);
+        }
+    });
+
+
+
+    if (completedItems > 0) {
+        var compButDiv = document.getElementById("comp-but-div");
+        var delCompButton = document.createElement("button");
+        delCompButton.textContent = "Delete Completed";
+        delCompButton.className = "btn-warning del-comp-btn";
+        delCompButton.id = "del-comp-btn";
+        delCompButton.onclick = deleteAllCompleted(todos);
+        compButDiv.appendChild(delCompButton);
+    }
+    var setAll = document.getElementById("set-all");
+    setAll.onclick = changeFilter(-1);
+    var setActive = document.getElementById("set-active");
+    setActive.onclick = changeFilter(0);
+    var setCompleted = document.getElementById("set-completed");
+    setCompleted.onclick = changeFilter(1);
+    itemsLeftDiv.textContent = itemsLeft + " items left to complete";
+}
+
+/**
+ * dynamicaly builds a html list item element and adds it to the list
+ * @param todo to make
+ */
+function makeTodoOnScreen(todo) {
+
     var listItem = document.createElement("li");
-    var titleDiv = document.createElement("section");
+    var liDiv = document.createElement("div");
+    var liCheckbox = document.createElement("input");
+    var liLabel = document.createElement("label");
+    var liButton = document.createElement("button");
 
-    var liButtonDiv = document.createElement("section");
-    var liCompButtonDiv = document.createElement("section");
-    var liDeleteButtonDiv = document.createElement("section");
+    liDiv.id = "liDiv";
+    liCheckbox.type = "checkbox";
+    liCheckbox.checked = todo.isComplete;
+    liCheckbox.setAttribute("itemId", todo.id);
+    liCheckbox.onclick = completeListItemEvent;
+    liLabel.textContent = todo.title;
+    liButton.textContent = "X";
+    liButton.onclick = deleteListItemEvent;
+    liButton.setAttribute("itemId", todo.id);
 
-    var compButton = document.createElement("button");
-    var delButton = document.createElement("button");
+    liDiv.appendChild(liCheckbox);
+    liDiv.appendChild(liLabel);
+    liDiv.appendChild(liButton);
 
-    titleDiv.id = "title-div";
-    liCompButtonDiv.className = "li-div";
-    liButtonDiv.className = "li-div-holder";
-    liDeleteButtonDiv.className = "li-div";
-    titleDiv.textContent = todo.title;
-
-    compButton.textContent = "Complete";
-    compButton.setAttribute("itemId", todo.id);
-
-    delButton.textContent = "Delete";
-    delButton.className = "delete-btn btn-warning";
-    delButton.setAttribute("itemId", todo.id);
-    delButton.onclick = deleteListItemEvent;
-
-    if (todo.isComplete) {
-        compButton.textContent = "Completed";
-        titleDiv.className += "completed-txt";
-        compButton.className = "btn-active btn-warning completed-btn";
-        compButton.disabled = true;
-        compdItems++;
-    }
-    else {
-        compButton.onclick = completeListItem;
-        compButton.disabled = false;
-        compButton.className = "complete-btn btn-warning";
-    }
-
-    listItem.appendChild(titleDiv);
-    liCompButtonDiv.appendChild(compButton);
-    liDeleteButtonDiv.appendChild(delButton);
-    liButtonDiv.appendChild(liCompButtonDiv);
-    liButtonDiv.appendChild(liDeleteButtonDiv);
-    listItem.appendChild(liButtonDiv);
+    listItem.appendChild(liDiv);
     todoList.appendChild(listItem);
-    return compdItems;
+
 }
 
 function deleteAllCompleted(todos) {
@@ -185,11 +201,11 @@ function deleteListItem(id, callback) {
     });
 }
 
-function completeListItem(event) {
+function completeListItemEvent(event) {
     if (event && event.target) {
         var id = event.target.getAttribute("itemId");
         if (id) {
-            updateListItem(id, true);
+            updateListItem(id, event.target.checked);
         }
     }
 }

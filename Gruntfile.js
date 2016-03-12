@@ -16,9 +16,17 @@ module.exports = function(grunt) {
         nodemon: {
             dev: {
                 script: "server.js",
-
                 options: {watch: ["server"]}
             }
+        },
+        watch: {
+              all: {
+                options: {
+                    livereload: true
+                },
+                files: ['public/*.js'],
+                tasks: ['jshint']
+            },
         },
         jshint: {
             all: ["Gruntfile.js", "server.js", "server/**/*.js", "test/**/*.js", "public/**/*.js"],
