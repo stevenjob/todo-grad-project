@@ -1,28 +1,30 @@
 {
   "name": "todo-grad-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "A todo application",
   "main": "server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "grunt ci-test"
+    "test": "grunt ci-test",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:joebandenburg/todo-grad-project.git"
+    "url": "git@github.com:stevenjob/todo-grad-project.git"
   },
-  "author": "Joe Bandenburg <joe@bandenburg.com>",
+  "author": "Steven Job <steven_job@live.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joebandenburg/todo-grad-project/issues"
+    "url": "https://github.com/stevenjob/todo-grad-project/issues"
   },
-  "homepage": "https://github.com/joebandenburg/todo-grad-project",
+  "homepage": "https://github.com/stevenjob/todo-grad-project",
   "devDependencies": {
     "chai": "^2.3.0",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-watch": "^0.6.0",
     "grunt-execute": "^0.2.2",
     "grunt-jscs": "^1.8.0",
     "grunt-mocha-istanbul": "^2.4.0",
