@@ -1,3 +1,25 @@
+
+
+.container {
+    display: block;
+}
+
+.row {
+    display: flex;
+}
+
+.col {
+    margin: auto;
+}
+
+#todo-form {
+    display: inline-block;
+}
+
+#toggle-all {
+    display: none;
+}
+
 body {
     background-color: #005fb3;
     color: rgba(0, 0, 0, 0.87);
@@ -9,8 +31,8 @@ header {
     background-color: #FFE76A;
     padding: 0.5em 1em;
 }
+
 section {
-    max-width: 1170px;
     margin-left: auto;
     margin-right: auto;
 }

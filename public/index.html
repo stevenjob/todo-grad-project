@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>TODO List</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link href="main.css" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/ico" href="favicon.ico">
-        <script src="/fetch/fetch.js"></script>
-    </head>
-    <body>
-        <header>
-            <h1>TODO List</h1>
-        </header>
-        <div id="top-div" class="row" >
-            <div id="count-label" class="text-center col-md-5"></div>
-            <div id="comp-but-div" class="col-md-5"></div>
-        </div>
+<head>
+    <meta charset="utf-8">
+    <title>TODO List</title>
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <script src="/fetch/fetch.js"></script>
+</head>
+<body>
+    <header>
+        <h1>TODO List</h1>
+    </header>
+    <section class="container">
         <div class="row">
-            <section class="col-md-8">
-                <h2 id="todo-list-placeholder">Loading...</h2>
-                <ul id="todo-list" class="col-md-8"></ul>
-            </section>
-            <section class="col-md-4">
-                <div>
-                    <h3>Filter</h3>
-                    <input id="set-all" class="btn-warning" type="submit" value="All">
-                    <input id="set-active" class="btn-warning" type="submit" value="Active">
-                    <input id="set-completed" class="btn-warning" type="submit" value="Completed">
-                    </div>
-                <div>
-                    <h3>New</h3>
+            <div class="col">
+                <span>
+                    <input id="toggle-all" type="checkbox" >
                     <form id="todo-form">
                         <input id="new-todo" placeholder="What needs to be done?" autofocus>
-                        <input id="submit-todo" class="btn-warning"  type="submit" value="Create">
                     </form>
-                </div>
-                <div id="error"></div>
-            </section>
+                    <div id="error"></div>
+                </span>
+            </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <h2 id="todo-list-placeholder">Loading...</h2>
+                <ul id="todo-list"></ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="count-label" class="text-center"></div>
+                <input id="set-all" class="btn-warning" type="submit" value="All">
+                <input id="set-active" class="btn-warning" type="submit" value="Active">
+                <input id="set-completed" class="btn-warning" type="submit" value="Completed">
+                <div id="comp-but-div"></div>
+            </div>
+        </div>
+    </section>
+
+
         <script type="text/javascript" src="main.js"></script>
     </body>
-</html>
+    </html>
