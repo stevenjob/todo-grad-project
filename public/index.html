@@ -26,7 +26,6 @@
                     <form id="todo-form">
                         <input type="text" id="new-todo" class="main-input" placeholder="What needs to be done?" autocomplete="off" autofocus>
                     </form>
-                    <div id="error"></div>
                 </div>
             </div>
         </div>
@@ -35,18 +34,25 @@
                 <ul id="todo-list"></ul>
             </div>
         </div>
-        <div class="row">
+        <div id="bottom-buttons" class="row">
             <div class="col">
-                <div id="count-label" class="text-center"></div>
-                <input id="set-all" class="btn-warning" type="submit" value="All">
-                <input id="set-active" class="btn-warning" type="submit" value="Active">
-                <input id="set-completed" class="btn-warning" type="submit" value="Completed">
-                <div id="comp-but-div"></div>
+                <div class="button-container">
+                    <span id="count-label" class="text-center"></span>
+                    <div class="filter-buttons">
+                        <input id="set-all" class="button" type="submit" value="All">
+                        <input id="set-active" class="button" type="submit" value="Active">
+                        <input id="set-completed" class="button" type="submit" value="Completed">
+                    </div>
+                    <div class="clear-completed-div">
+                        <button type="button" id="clear-completed" class="button">Clear Completed</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <h2 id="loading">Loading...</h2>
+                <div id="error"></div>
             </div>
         </div>
 

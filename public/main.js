@@ -4,6 +4,8 @@ var form = document.getElementById("todo-form");
 var newTodoInput = document.getElementById("new-todo");
 var error = document.getElementById("error");
 var itemsLeftDiv = document.getElementById("count-label");
+var bottomButtonDiv = document.getElementById("bottom-buttons");
+
 var filterVal = -1;
 
 // document.getElementById("toggle-all").onclick = function(event) {
@@ -70,11 +72,8 @@ function reloadTodoList() {
         todoList.removeChild(todoList.firstChild);
     }
 
-    //remove delete all button
-    if (document.getElementById("del-comp-btn")) {
-        document.getElementById("comp-but-div").removeChild(document.getElementById("del-comp-btn"));
-    }
-
+    //hide bottom buttons
+    bottomButtonDiv.style.display = "none";
     //add loading text
     loader.style.display = "block";
 
@@ -103,6 +102,7 @@ function formatList(todos) {
             makeTodoOnScreen(todo);
         }
     });
+    bottomButtonDiv.style.display = "flex";
 
     if (completedItems > 0) {
         var compButDiv = document.getElementById("comp-but-div");
