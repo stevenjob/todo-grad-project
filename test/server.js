@@ -147,6 +147,17 @@ describe("server", function() {
                 done();
             });
         });
+        it("responds with status code 200", function(done) {
+            request.put({
+                url: todoListUrl + "/" + 0,
+                json: {
+                    title: "This is a updated item again"
+                }
+            }, function(error, response, body) {
+                assert.equal(response.statusCode, 200);
+                done();
+            });
+        });
         it("responds with status code 404", function(done) {
             request.put({
                 url: todoListUrl + "/" + 3,

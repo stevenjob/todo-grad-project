@@ -69,14 +69,12 @@ module.exports.getErrorText = function() {
 };
 
 module.exports.getTodoList = function() {
-    var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
-    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
     return driver.findElements(webdriver.By.css("#todo-list li"));
 };
 
 module.exports.addTodo = function(text) {
     driver.findElement(webdriver.By.id("new-todo")).sendKeys(text);
-    driver.findElement(webdriver.By.id("submit-todo")).click();
+    driver.findElement(webdriver.By.id("new-todo")).sendKeys(webdriver.Key.ENTER);
 };
 
 module.exports.setupErrorRoute = function(action, route) {
@@ -93,20 +91,13 @@ module.exports.setupErrorRoute = function(action, route) {
 };
 
 module.exports.completeTodo = function(id) {
-    var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
-    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".complete-btn[itemid='" + id + "' ]")).click();
+    driver.findElement(webdriver.By.css(".toggle span[item-id='" + id + "' ]")).click();
 };
 
 module.exports.deleteTodo = function(id) {
-    var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
-    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".delete-btn[itemid='" + id + "' ]")).click();
+    driver.findElement(webdriver.By.css(".delete-button[item-id='" + id + "' ]")).click();
 };
 
 module.exports.deleteAllCompTodo = function() {
-    var todoListPlaceholder = driver.findElement(webdriver.By.id("todo-list-placeholder"));
-    driver.wait(webdriver.until.elementIsNotVisible(todoListPlaceholder), 5000);
-    driver.findElement(webdriver.By.css(".del-comp-btn")).click();
+    driver.findElement(webdriver.By.css("#clear-completed ")).click();
 };
-

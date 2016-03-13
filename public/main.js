@@ -8,7 +8,7 @@ var toggleAllCheckbox = document.getElementById("toggle-all-checkbox");
 var setAll = document.getElementById("set-all");
 var setCompleted = document.getElementById("set-completed");
 var setActive = document.getElementById("set-active");
-var compButton = document.getElementById('clear-completed');
+var compButton = document.getElementById("clear-completed");
 var filterVal = -1;
 
 //global reference to the most recent list of todo items
@@ -116,7 +116,7 @@ function formatList(todos) {
             compButton.style.display = "block";
             compButton.onclick = deleteAllCompletedEvent;
         }
-    })
+    });
 }
 
 /**
@@ -138,6 +138,7 @@ function makeTodoOnScreen(todo) {
     liCheckboxInput.checked = todo.isComplete;
     // liCheckboxInput.id = todo.id;
     var liCheckboxSpan = document.createElement("span");
+    liCheckboxSpan.setAttribute("item-id", todo.id);
     var liCheckboxSpanIcon = document.createElement("i");
     liCheckboxSpanIcon.className = "fa fa-check";
 
@@ -235,7 +236,7 @@ function completeListItemEvent(event) {
         if (item.children[0].children[0].checked === false) {
             toggleAllCheckbox.checked = false;
         }
-    })
+    });
 
     if (event && event.target) {
         var id = event.target.getAttribute("item-id");
@@ -279,10 +280,10 @@ toggleAllCheckbox.onclick = function(event) {
                 item.children[0].children[0].checked = isChecked;
                 updateListItem(item.children[0].children[0].getAttribute("item-id"), isChecked, undefined, true);
             }
-        })
+        });
         reloadTodoList();
     }
-}
+};
 
 function parseList(callback) {
     var listItems = todoList.children;

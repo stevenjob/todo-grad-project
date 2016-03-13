@@ -8,6 +8,7 @@ module.exports = function(port, middleware, callback) {
     if (middleware) {
         app.use(middleware);
     }
+
     app.use(express.static("public"));
     app.use("/fetch/", express.static("node_modules/whatwg-fetch"));
     app.use(bodyParser.json());
@@ -50,8 +51,8 @@ module.exports = function(port, middleware, callback) {
         var id = req.params.id;
         var todo = getTodo(id);
         if (todo) {
-            todo.title = (typeof update.title === 'undefined') ? todo.title : update.title;
-            todo.isComplete = (typeof update.isComplete === 'undefined') ? todo.isComplete : update.isComplete;
+            todo.title = (typeof update.title === "undefined") ? todo.title : update.title;
+            todo.isComplete = (typeof update.isComplete === "undefined") ? todo.isComplete : update.isComplete;
             res.sendStatus(200);
         }
         else {
