@@ -296,4 +296,3 @@ function parseList(callback) {
 }
 
 reloadTodoList();
-setInterval(reloadTodoList, 50000);

@@ -110,18 +110,18 @@ describe("server", function() {
             });
         });
     });
-    ////todo from here
     describe("update a new todo", function() {
         beforeEach(function(done) {
             request.post({
                 url: todoListUrl,
                 json: {
-                    title: "This is a TODO item"
+                    title: "This is a TODO item",
+                    isComplete: false
                 }
             }, function(error, response) {
                 assert.equal(response.statusCode, 201);
+                done();
             });
-            done();
         });
         it("responds with status code 200 when update new item", function(done) {
             request.put({

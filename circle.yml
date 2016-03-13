@@ -1,6 +1,9 @@
 general:
   artifacts:
     - "build_artifacts"
+machine:
+    node:
+        version: 5.0.0
 deployment:
   prod:
     branch: master

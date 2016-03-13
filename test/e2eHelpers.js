@@ -16,6 +16,8 @@ var driver;
 var router;
 var server;
 
+var timeout = 1000000000;
+
 module.exports.setupDriver = function() {
     driver = new webdriver.Builder().forBrowser("chrome").build();
 };
@@ -73,6 +75,9 @@ module.exports.getTodoList = function() {
 };
 
 module.exports.addTodo = function(text) {
+    driver.wait(function() {
+        return driver.findElement(webdriver.By.id("new-todo")).isDisplayed();
+    }, timeout);
     driver.findElement(webdriver.By.id("new-todo")).sendKeys(text);
     driver.findElement(webdriver.By.id("new-todo")).sendKeys(webdriver.Key.ENTER);
 };
@@ -91,13 +96,22 @@ module.exports.setupErrorRoute = function(action, route) {
 };
 
 module.exports.completeTodo = function(id) {
+    driver.wait(function() {
+        return driver.findElement(webdriver.By.css(".toggle span[item-id='" + id + "' ]")).isDisplayed();
+    }, timeout);
     driver.findElement(webdriver.By.css(".toggle span[item-id='" + id + "' ]")).click();
 };
 
 module.exports.deleteTodo = function(id) {
+    driver.wait(function() {
+        return driver.findElement(webdriver.By.css(".delete-button[item-id='" + id + "' ]")).isDisplayed();
+    }, timeout);
     driver.findElement(webdriver.By.css(".delete-button[item-id='" + id + "' ]")).click();
 };
 
 module.exports.deleteAllCompTodo = function() {
+    driver.wait(function() {
+        return driver.findElement(webdriver.By.css("#clear-completed ")).isDisplayed();
+    }, timeout);
     driver.findElement(webdriver.By.css("#clear-completed ")).click();
 };
