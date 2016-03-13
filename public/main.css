@@ -84,7 +84,7 @@ li {
 #comp-but-div {
     display:inline-block;
     margin-left: 40px;
- }
+}
 #todo-list {
     list-style-type: none;
 }
@@ -101,49 +101,51 @@ button {
 
 /* checkbox */
 #toggle-all input{
-  visibility: hidden;
-  display:block;
-  height:0;
-  width:0;
-  position:absolute;
-  overflow:hidden;
-}
-#toggle-all span {
-  width: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-right: 0px;
-  display: inline-block;
-  vertical-align: bottom;
+    visibility: hidden;
+    display:block;
+    height:0;
+    width:0;
+    position:absolute;
+    overflow:hidden;
 }
 
 #toggle-all {
     display: flex;
     margin-top: 10px;
-    margin-bottom: 10px;
     background: #FFF;
 }
 
-[type=checkbox]:checked + span:before {/* <-- style its checked state */
-    content: '❯';
+#toggle-all span {
+    background: #FFE76A;
+    text-align: center;
+    width: 50px;
+    padding-top: 10px;
+    border-right: 0px;
+    display: inline-block;
+    vertical-align: bottom;
+    color: #d9d9d9;
+}
+
+[type=checkbox]:checked + span i {
+    color: #005FB3;
 }
 
 /* input */
 
 #todo-form {
     padding-top: 10px;
-    padding-bottom: 10px;
     display: inline-block;
 }
 
-
-
 .main-input {
+    color: #005FB3;
+    background: #FFE76A;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
     border-left: 0px;
+    border: 0;
     /*border: solid 1px #dcdcdc;*/
     /*transition: box-shadow 0.3s, border 0.3s;*/
     display: block;

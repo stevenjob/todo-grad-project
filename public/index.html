@@ -5,6 +5,7 @@
     <title>TODO List</title>
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="/fetch/fetch.js"></script>
 </head>
 <body>
@@ -17,7 +18,10 @@
                 <div class="row">
                     <label id="toggle-all">
                         <input type="checkbox">
-                        <span id="checkbox-span"></span>
+                        <span id="checkbox-span">
+                            <i class="fa fa-sort-desc"></i>
+                            <!-- need to make fa icon bigger -->
+                        </span>
                     </label>
                     <form id="todo-form">
                         <input type="text" id="new-todo" class="main-input" placeholder="What needs to be done?" autocomplete="off" autofocus>
