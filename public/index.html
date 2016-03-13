@@ -14,13 +14,16 @@
     <section class="container">
         <div class="row">
             <div class="col">
-                <span>
-                    <input id="toggle-all" type="checkbox" >
+                <div class="row">
+                    <label id="toggle-all">
+                        <input type="checkbox">
+                        <span id="checkbox-span"></span>
+                    </label>
                     <form id="todo-form">
-                        <input type="text" id="new-todo" class="main-input" placeholder="What needs to be done?" autofocus>
+                        <input type="text" id="new-todo" class="main-input" placeholder="What needs to be done?" autocomplete="off" autofocus>
                     </form>
                     <div id="error"></div>
-                </span>
+                </div>
             </div>
         </div>
         <div class="row">

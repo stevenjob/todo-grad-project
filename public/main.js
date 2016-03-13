@@ -120,7 +120,7 @@ function formatList(todos) {
     setActive.onclick = changeFilter(0);
     var setCompleted = document.getElementById("set-completed");
     setCompleted.onclick = changeFilter(1);
-    itemsLeftDiv.textContent = itemsLeft + " items left to complete";
+    itemsLeftDiv.textContent = itemsLeft + " items left";
 }
 
 /**
