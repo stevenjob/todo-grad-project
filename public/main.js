@@ -7,9 +7,9 @@ var itemsLeftDiv = document.getElementById("count-label");
 var filterVal = -1;
 
 /**
- * Runs on when user presses enter on add todo form
- * @param event
- */
+* Runs on when user presses enter on add todo form
+* @param event
+*/
 form.onsubmit = function(event) {
     var title = newTodoInput.value; //TODO whats in this object
     createTodo(title, reloadTodoList);
@@ -19,11 +19,11 @@ form.onsubmit = function(event) {
 };
 
 /**
- * send a post request to the server to create the todo item
- * then invokes the callback function if successful
- * @param title of todo item
- * @param {Function} callback
- */
+* send a post request to the server to create the todo item
+* then invokes the callback function if successful
+* @param title of todo item
+* @param {Function} callback
+*/
 function createTodo(title, callback) {
     fetch("/api/todo", {
         method: "post",
@@ -41,7 +41,7 @@ function createTodo(title, callback) {
         }
         else {
             error.textContent = "Failed to create item. Server returned " + response.status + " - " +
-                response.statusText;
+            response.statusText;
         }
     });
 }
@@ -73,13 +73,10 @@ function reloadTodoList() {
 
     //add loading text
     loader.style.display = "block";
-//////////////////////////////////////
 
     //get todo list from server
     getTodoList(formatList);
-
 }
-
 
 function formatList(todos) {
 
@@ -103,8 +100,6 @@ function formatList(todos) {
         }
     });
 
-
-
     if (completedItems > 0) {
         var compButDiv = document.getElementById("comp-but-div");
         var delCompButton = document.createElement("button");
@@ -124,9 +119,9 @@ function formatList(todos) {
 }
 
 /**
- * dynamicaly builds a html list item element and adds it to the list
- * @param todo to make
- */
+* dynamicaly builds a html list item element and adds it to the list
+* @param todo to make
+*/
 function makeTodoOnScreen(todo) {
 
     var listItem = document.createElement("li");
@@ -191,7 +186,7 @@ function deleteListItem(id, callback) {
     }).then(function(response) {
         if (response.status !== 200) {
             error.textContent = "Failed to delete item. Server returned " +
-                this.status + " - " + this.responseText;
+            this.status + " - " + this.responseText;
         }
         else {
             if (callback) {
@@ -224,7 +219,7 @@ function updateListItem(id, isComplete, text) {
     }).then(function(response) {
         if (response.status !== 200) {
             error.textContent = "Failed to update item. Server returned " +
-                this.status + " - " + this.responseText;
+            this.status + " - " + this.responseText;
         }
         else {
             reloadTodoList();

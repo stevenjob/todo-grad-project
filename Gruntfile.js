@@ -20,12 +20,12 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-              all: {
+            all: {
                 options: {
                     livereload: true
                 },
-                files: ['public/*.js'],
-                tasks: ['jshint']
+                files: ["public/*.js"],
+                tasks: ["jshint"]
             },
         },
         jshint: {
@@ -110,9 +110,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask("check", ["jshint", "jscs"]);
     grunt.registerTask("test", ["check", "mochaTest:test", "mocha_istanbul:test", "istanbul_report",
-        "istanbul_check_coverage"]);
+    "istanbul_check_coverage"]);
     grunt.registerTask("ci-test", ["check", "mochaTest:ci", "mocha_istanbul:ci", "istanbul_report",
-        "istanbul_check_coverage"]);
+    "istanbul_check_coverage"]);
     grunt.registerTask("default", "test");
     grunt.registerTask("serve", "execute");
     grunt.registerTask("watch", "nodemon");
