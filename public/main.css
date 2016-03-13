@@ -185,9 +185,7 @@ background-color: #FF0000;
     border-style: dotted;
     border-color: rgba(175, 47, 47, 0.2);
     color: #005FB3;
-}
-
-.button {
+    cursor: pointer;
 }
 
 #count-label {
@@ -224,6 +222,10 @@ background-color: #FF0000;
     cursor: pointer;
     color: #005FB3;
     outline: none;
+}
+
+.completed-label {
+    text-decoration: line-through;
 }
 
 #clear-completed:hover {

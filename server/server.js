@@ -50,8 +50,8 @@ module.exports = function(port, middleware, callback) {
         var id = req.params.id;
         var todo = getTodo(id);
         if (todo) {
-            todo.title = update.title || todo.title;
-            todo.isComplete = update.isComplete || todo.isComplete;
+            todo.title = (typeof update.title === 'undefined') ? todo.title : update.title;
+            todo.isComplete = (typeof update.isComplete === 'undefined') ? todo.isComplete : update.isComplete;
             res.sendStatus(200);
         }
         else {

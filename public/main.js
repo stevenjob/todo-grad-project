@@ -5,12 +5,12 @@ var newTodoInput = document.getElementById("new-todo");
 var error = document.getElementById("error");
 var itemsLeftDiv = document.getElementById("count-label");
 var bottomButtonDiv = document.getElementById("bottom-buttons");
-
+var toggleAllCheckbox = document.getElementById("toggle-all-checkbox");
+var setAll = document.getElementById("set-all");
+var setCompleted = document.getElementById("set-completed");
+var setActive = document.getElementById("set-active");
 var filterVal = -1;
 
-// document.getElementById("toggle-all").onclick = function(event) {
-//     debugger;
-// }
 
 /**
 * Runs on when user presses enter on add todo form
@@ -103,23 +103,28 @@ function formatList(todos) {
         }
     });
     bottomButtonDiv.style.display = "flex";
+    //
+    // if (completedItems > 0) {
+    //     var compButDiv = document.getElementById("comp-but-div");
+    //     var delCompButton = document.createElement("button");
+    //     delCompButton.textContent = "Delete Completed";
+    //     delCompButton.className = "btn-warning del-comp-btn";
+    //     delCompButton.id = "del-comp-btn";
+    //     delCompButton.onclick = deleteAllCompleted(todos);
+    //     compButDiv.appendChild(delCompButton);
+    // }
 
-    if (completedItems > 0) {
-        var compButDiv = document.getElementById("comp-but-div");
-        var delCompButton = document.createElement("button");
-        delCompButton.textContent = "Delete Completed";
-        delCompButton.className = "btn-warning del-comp-btn";
-        delCompButton.id = "del-comp-btn";
-        delCompButton.onclick = deleteAllCompleted(todos);
-        compButDiv.appendChild(delCompButton);
-    }
-    var setAll = document.getElementById("set-all");
     setAll.onclick = changeFilter(-1);
-    var setActive = document.getElementById("set-active");
     setActive.onclick = changeFilter(0);
-    var setCompleted = document.getElementById("set-completed");
     setCompleted.onclick = changeFilter(1);
     itemsLeftDiv.textContent = itemsLeft + " items left";
+
+    toggleAllCheckbox.checked = true;
+    parseList(function (item) {
+        if (item.children[0].children[0].checked === false) {
+            toggleAllCheckbox.checked = false;
+        }
+    })
 }
 
 /**
@@ -137,7 +142,8 @@ function makeTodoOnScreen(todo) {
     liCheckboxLabel.className = "toggle";
     var liCheckboxInput = document.createElement("input");
     liCheckboxInput.type = "checkbox";
-    liCheckboxInput.setAttribute("itemId", todo.id);
+    liCheckboxInput.setAttribute("item-id", todo.id);
+    liCheckboxInput.checked = todo.isComplete;
     // liCheckboxInput.id = todo.id;
     var liCheckboxSpan = document.createElement("span");
     var liCheckboxSpanIcon = document.createElement("i");
@@ -147,17 +153,17 @@ function makeTodoOnScreen(todo) {
     var liDeleteSpan = document.createElement("span");
     liDeleteSpan.className = "delete-button";
     liDeleteSpan.onclick = deleteListItemEvent;
-    liDeleteSpan.setAttribute("itemId", todo.id);
+    liDeleteSpan.setAttribute("item-id", todo.id);
     var liDeleteSpanIcon = document.createElement("i");
     liDeleteSpanIcon.className = "fa fa-close";
 
-    liDeleteSpanIcon.setAttribute("itemId", todo.id);
+    liDeleteSpanIcon.setAttribute("item-id", todo.id);
     // liDeleteSpanIcon.onclick = deleteListItemEvent;
     var liLabel = document.createElement("label");
-    liLabel.className = "todo-label";
+    liLabel.className = todo.isComplete ? "todo-label completed-label" : "todo-label";
     liDiv.className = "li-div";
 
-    // liCheckboxInput.onclick = completeListItemEvent;
+    liCheckboxInput.onclick = completeListItemEvent;
     liLabel.textContent = todo.title;
 
     liCheckboxLabel.appendChild(liCheckboxInput);
@@ -189,13 +195,23 @@ function deleteAllCompleted(todos) {
 function changeFilter(filter) {
     return function() {
         filterVal = filter;
+        setAll.className = "button";
+        setActive.className = "button";
+        setCompleted.className = "button";
+        if (filter === 1) {
+            setCompleted.className += " selected-filter";
+        } else if (filter === 0) {
+            setActive.className += " selected-filter";
+        } else {
+            setAll.className += " selected-filter";
+        }
         reloadTodoList();
     };
 }
 
 function deleteListItemEvent(event) {
     if (event && event.target) {
-        var id = event.target.getAttribute("itemId");
+        var id = event.target.getAttribute("item-id");
         if (id) {
             deleteListItem(id, reloadTodoList);
         }
@@ -223,15 +239,23 @@ function deleteListItem(id, callback) {
 }
 
 function completeListItemEvent(event) {
+
+    toggleAllCheckbox.checked = true;
+    parseList(function (item) {
+        if (item.children[0].children[0].checked === false) {
+            toggleAllCheckbox.checked = false;
+        }
+    })
+
     if (event && event.target) {
-        var id = event.target.getAttribute("itemId");
+        var id = event.target.getAttribute("item-id");
         if (id) {
             updateListItem(id, event.target.checked);
         }
     }
 }
 
-function updateListItem(id, isComplete, text) {
+function updateListItem(id, isComplete, text, softReload) {
     fetch("/api/todo/" + id, {
         method: "put",
         headers: {
@@ -248,10 +272,37 @@ function updateListItem(id, isComplete, text) {
             this.status + " - " + this.responseText;
         }
         else {
-            reloadTodoList();
+            if (!softReload) {
+                reloadTodoList();
+            }
         }
     });
 }
 
+toggleAllCheckbox.onclick = function(event) {
+    if (event && event.target) {
+        var isChecked = event.target.checked;
+        parseList(function (item) {
+            //get label then get input checkbox then get checked attribute
+            if (item.children[0].children[0].checked !== isChecked) {
+                item.children[1].className = isChecked ? "todo-label completed-label" : "todo-label";
+                item.children[0].children[0].checked = isChecked;
+                updateListItem(item.children[0].children[0].getAttribute("item-id"), isChecked, undefined, true);
+            }
+        })
+        reloadTodoList();
+    }
+}
+
+function parseList(callback) {
+    var listItems = todoList.children;
+    if (listItems && listItems.length) {
+        for (var i = 0; i < listItems.length; i++) {
+            //get div
+            callback(listItems[i].children[0]);
+        }
+    }
+}
+
 reloadTodoList();
-//setInterval(reloadTodoList, 10000);
+setInterval(reloadTodoList, 10000);
