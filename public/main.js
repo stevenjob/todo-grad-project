@@ -1,5 +1,4 @@
 var todoList = document.getElementById("todo-list");
-var loader = document.getElementById("loading");
 var form = document.getElementById("todo-form");
 var newTodoInput = document.getElementById("new-todo");
 var error = document.getElementById("error");
@@ -9,19 +8,23 @@ var toggleAllCheckbox = document.getElementById("toggle-all-checkbox");
 var setAll = document.getElementById("set-all");
 var setCompleted = document.getElementById("set-completed");
 var setActive = document.getElementById("set-active");
+var compButton = document.getElementById('clear-completed');
 var filterVal = -1;
 
-
+//global reference to the most recent list of todo items
+var todosArray = [];
 /**
 * Runs on when user presses enter on add todo form
 * @param event
 */
 form.onsubmit = function(event) {
-    var title = newTodoInput.value; //TODO whats in this object
-    createTodo(title, reloadTodoList);
+    var title = newTodoInput.value;
+    if (title && title !== "") {
+        createTodo(title, reloadTodoList);
+    }
     //clears the input box
     newTodoInput.value = "";
-    event.preventDefault();//TODO what does this do
+    event.preventDefault();
 };
 
 /**
@@ -74,18 +77,13 @@ function reloadTodoList() {
 
     //hide bottom buttons
     bottomButtonDiv.style.display = "none";
-    //add loading text
-    loader.style.display = "block";
 
     //get todo list from server
     getTodoList(formatList);
 }
 
 function formatList(todos) {
-
-    //hide loading text
-    loader.style.display = "none";
-
+    todosArray = todos;
     //used to calc the items left to display to the user
     var itemsLeft = 0;
     var completedItems = 0;
@@ -103,16 +101,6 @@ function formatList(todos) {
         }
     });
     bottomButtonDiv.style.display = "flex";
-    //
-    // if (completedItems > 0) {
-    //     var compButDiv = document.getElementById("comp-but-div");
-    //     var delCompButton = document.createElement("button");
-    //     delCompButton.textContent = "Delete Completed";
-    //     delCompButton.className = "btn-warning del-comp-btn";
-    //     delCompButton.id = "del-comp-btn";
-    //     delCompButton.onclick = deleteAllCompleted(todos);
-    //     compButDiv.appendChild(delCompButton);
-    // }
 
     setAll.onclick = changeFilter(-1);
     setActive.onclick = changeFilter(0);
@@ -120,9 +108,13 @@ function formatList(todos) {
     itemsLeftDiv.textContent = itemsLeft + " items left";
 
     toggleAllCheckbox.checked = true;
+    compButton.style.display = "none";
     parseList(function (item) {
         if (item.children[0].children[0].checked === false) {
             toggleAllCheckbox.checked = false;
+        } else {
+            compButton.style.display = "block";
+            compButton.onclick = deleteAllCompletedEvent;
         }
     })
 }
@@ -181,15 +173,13 @@ function makeTodoOnScreen(todo) {
 
 }
 
-function deleteAllCompleted(todos) {
-    return function() {
-        todos.forEach(function(todo) {
-            if (todo.isComplete) {
-                deleteListItem(todo.id);
-            }
-        });
-        reloadTodoList();
-    };
+function deleteAllCompletedEvent() {
+    todosArray.forEach(function(todo) {
+        if (todo.isComplete) {
+            deleteListItem(todo.id);
+        }
+    });
+    reloadTodoList();
 }
 
 function changeFilter(filter) {
@@ -305,4 +295,4 @@ function parseList(callback) {
 }
 
 reloadTodoList();
-setInterval(reloadTodoList, 10000);
+setInterval(reloadTodoList, 50000);

@@ -2,6 +2,7 @@
 /*general for layout*/
 .container {
     display: block;
+    margin-top: 50px;
 }
 
 .row {
@@ -203,7 +204,7 @@ background-color: #FF0000;
     justify-content: space-between;
 }
 
-.clear-completed-div {
+#clear-completed-div {
     min-width: 120px;
     border: 0;
     padding: 0;
