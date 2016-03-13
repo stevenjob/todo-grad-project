@@ -6,6 +6,10 @@ var error = document.getElementById("error");
 var itemsLeftDiv = document.getElementById("count-label");
 var filterVal = -1;
 
+// document.getElementById("toggle-all").onclick = function(event) {
+//     debugger;
+// }
+
 /**
 * Runs on when user presses enter on add todo form
 * @param event
@@ -124,25 +128,47 @@ function formatList(todos) {
 */
 function makeTodoOnScreen(todo) {
 
+    //make containers
     var listItem = document.createElement("li");
     var liDiv = document.createElement("div");
-    var liCheckbox = document.createElement("input");
+
+    //make is completed checkbox
+    var liCheckboxLabel = document.createElement("label");
+    liCheckboxLabel.className = "toggle";
+    var liCheckboxInput = document.createElement("input");
+    liCheckboxInput.type = "checkbox";
+    liCheckboxInput.setAttribute("itemId", todo.id);
+    // liCheckboxInput.id = todo.id;
+    var liCheckboxSpan = document.createElement("span");
+    var liCheckboxSpanIcon = document.createElement("i");
+    liCheckboxSpanIcon.className = "fa fa-check";
+
+    //make delete button
+    var liDeleteSpan = document.createElement("span");
+    liDeleteSpan.className = "delete-button";
+    liDeleteSpan.onclick = deleteListItemEvent;
+    liDeleteSpan.setAttribute("itemId", todo.id);
+    var liDeleteSpanIcon = document.createElement("i");
+    liDeleteSpanIcon.className = "fa fa-close";
+
+    liDeleteSpanIcon.setAttribute("itemId", todo.id);
+    // liDeleteSpanIcon.onclick = deleteListItemEvent;
     var liLabel = document.createElement("label");
-    var liButton = document.createElement("button");
+    liLabel.className = "todo-label";
+    liDiv.className = "li-div";
 
-    liDiv.id = "liDiv";
-    liCheckbox.type = "checkbox";
-    liCheckbox.checked = todo.isComplete;
-    liCheckbox.setAttribute("itemId", todo.id);
-    liCheckbox.onclick = completeListItemEvent;
+    // liCheckboxInput.onclick = completeListItemEvent;
     liLabel.textContent = todo.title;
-    liButton.textContent = "X";
-    liButton.onclick = deleteListItemEvent;
-    liButton.setAttribute("itemId", todo.id);
 
-    liDiv.appendChild(liCheckbox);
+    liCheckboxLabel.appendChild(liCheckboxInput);
+    liCheckboxLabel.appendChild(liCheckboxSpan);
+    liCheckboxSpan.appendChild(liCheckboxSpanIcon);
+
+    liDeleteSpan.appendChild(liDeleteSpanIcon);
+
+    liDiv.appendChild(liCheckboxLabel);
     liDiv.appendChild(liLabel);
-    liDiv.appendChild(liButton);
+    liDiv.appendChild(liDeleteSpan);
 
     listItem.appendChild(liDiv);
     todoList.appendChild(listItem);

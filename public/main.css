@@ -34,29 +34,24 @@ h1 {
     margin-left: 100px;
     font-size: 34px;
     line-height: 30px;
-    color: #005db3;
+    color: #005fb3;
 }
 
 h3 {
     color: #FFE76A;
 }
 
-li {
-    height:52px;
+.li-div {
+    color: #005fb3;
+    display:flex;
+    margin-left: 20px;
+    width: 320px;
+    background: #FFE76A;
 }
 
-.li-div {
-    display:inline-block;
-    color: #FFE76A;
-    width:95px;
-    margin: 10px;
-}
 .li-div-holder {
     display:inline-block;
     color: #FFE76A;
-}
-.li-div button {
-    width: 100%;
 }
 
 #title-div {
@@ -98,9 +93,15 @@ button {
     margin-top: 10px;
     margin-left: 10px;
 }
+/* todo list */
+
+#todo-list {
+    padding: 0;
+    margin-top: 0px;
+}
 
 /* checkbox */
-#toggle-all input{
+.toggle input {
     visibility: hidden;
     display:block;
     height:0;
@@ -110,12 +111,30 @@ button {
 }
 
 #toggle-all {
-    display: flex;
     margin-top: 10px;
-    background: #FFF;
 }
 
-#toggle-all span {
+.toggle {
+    display: flex;
+}
+
+.delete-button {
+    cursor: pointer;
+    text-align: center;
+    padding-top: 10px;
+    width: 50px;
+}
+
+.todo-label {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    padding-left: 10px;
+    width: 65%;
+    text-align: left;
+    line-height: 35px;
+}
+
+.toggle span {
     background: #FFE76A;
     text-align: center;
     width: 50px;
@@ -126,6 +145,18 @@ button {
     color: #d9d9d9;
 }
 
+span i {
+    color: #d9d9d9;
+}
+
+.delete-button:hover i {
+    color: #FF0000;
+}
+
+/*span:hover {
+    background-color: #FF0000;
+}*/
+
 [type=checkbox]:checked + span i {
     color: #005FB3;
 }
@@ -135,6 +166,7 @@ button {
 #todo-form {
     padding-top: 10px;
     display: inline-block;
+    width: 250px
 }
 
 .main-input {
